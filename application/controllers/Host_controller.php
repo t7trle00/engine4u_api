@@ -25,25 +25,14 @@ class Host_controller extends CI_Controller {
  }
 	public function add_listing()
 	{
-		$this->load->helper('url');
 		$data['page'] = 'host/add_listing' ;
-		$this->load->view('menu/content',$data);
+		$this->load->view('host/menu_bar',$data);
 	}
-	public function get_listing()
-	{
-		$data['page'] = 'host/get_listing' ;
-		$this->load->view('menu/content',$data) ;
-	}
-	public function delete_listing()
-	{
-		$data['page'] = 'host/delete_listing' ;
-		$this->load->view('menu/content',$data) ;
-	}
-	public function get_edit_listing()
-	{
-		$data['page'] = 'host/edit_listing' ;
-		$this->load->view('menu/content',$data) ;
-	}
+  public function host()
+  {
+    $data['page'] = 'host/menu_bar' ;
+    $this->load->view('host/menu_bar',$data) ;
+  }
 	// public function update_listing($carID)
 	// {
 	// 	$data['carID'] =$carID ;

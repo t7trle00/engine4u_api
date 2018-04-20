@@ -32,7 +32,7 @@
           <div class="collapse navbar-collapse" id="myNavbar">
 
             <ul class="nav navbar-nav navbar-right hovers">
-              <li><a href="<?php echo site_url('host_controller/get_listing') ;?>" onclick="getListing('html')" >Host</a></li>
+              <li><a href="<?php echo site_url('host_controller/host') ;?>">Host</a></li>
               <li><a data-toggle="modal" data-target="#myModal">Intruction</a></li>
               <li><a href="<?php echo site_url('search/search_engine'); ?>">Messages</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

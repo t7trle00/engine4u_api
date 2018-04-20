@@ -1,6 +1,5 @@
 function getListing(format)
 {
-  alert('ok');
     /* this.format = format ; */
     var url = "http://localhost/engine4u_api/index.php/api/host/listing";
     /* url += '.'+ this.format ; */
