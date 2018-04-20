@@ -57,7 +57,6 @@ class Host extends REST_Controller
         ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
     }
   }
-
   public function listing_post()
   {
       $config['upload_path'] ='./cover_gallery/' ;
@@ -126,6 +125,52 @@ class Host extends REST_Controller
 
         $this->set_response($message, REST_Controller::HTTP_CREATED);
   }
+  public function cover_post()
+  {
+//upload cover photo to gallery
+    $carID = (int) $this->get('carid');
+    $config['upload_path'] ='./cover_gallery/' ;
+    $config['allowed_types'] = 'jpg|jpeg|png|gif' ;
+    $config['file_name'] = basename($_FILES['cover_photo_update']['name']) ;
+    $config['max_size']   = 1000000;
+    $config['max_width']  = 10240;
+    $config['max_height'] = 7680;
+
+    //Load upliad library and initialize configuration
+    $this->load->library('upload',$config) ;
+    $this->upload->initialize($config) ;
+
+    $this->upload->do_upload('cover_photo_update') ;
+    $data_upload_file = $this->upload-> data() ;
+    $image = $data_upload_file['file_name'] ;
+// upload other photo to gallery
+    $number_of_files = sizeof($_FILES['other_photo_update']['name']) ;
+    $files = $_FILES['other_photo_update'] ;
+    $config['upload_path'] = './other_gallery' ;
+    $config['allowed_types'] = 'jpg|jpeg|png|gif' ;
+    $config['max_size']   = 1000000000;
+    $config['max_width']  = 1024000;
+    $config['max_height'] = 768000;
+    for ($i = 0 ; $i < $number_of_files ; $i ++)
+    {
+      $_FILES['other_photo_update']['name'] =$files['name'][$i] ;
+      $_FILES['other_photo_update']['type'] =$files['type'][$i] ;
+      $_FILES['other_photo_update']['tmp_name'] =$files['tmp_name'][$i] ;
+      $_FILES['other_photo_update']['error'] =$files['error'][$i] ;
+      $_FILES['other_photo_update']['size'] =$files['size'][$i] ;
+      $this->upload->initialize($config) ;
+      $this->upload->do_upload('other_photo_update') ;
+      $data = $this->upload->data() ;
+      $other_photo[$i] = $data['file_name'] ;
+    }
+    $message = [
+      'cover_photo' => $image ,
+      'other_photo' => $other_photo,
+      'Post OK'
+    ] ;
+    $this->set_response($message, REST_Controller::HTTP_CREATED);
+  }
+
 //  public function listing_delete()
   public function listing_delete()
   {
@@ -157,13 +202,17 @@ class Host extends REST_Controller
   public function listing_put()
   {
     $carID = $this->get('carid') ;
+    $config['file_name'] = basename($this->put('cover_photo')) ;
+      //if photo does not exists, upload, if exits do nothing
+    // $doesPhotoExists=$this->Host_model->checkPhotoname(put('cover_photo'));
+    // if($doesPhotoExists == )
+    // {
     $config['upload_path'] ='./cover_gallery/' ;
     $config['allowed_types'] = 'jpg|jpeg|png|gif' ;
     $config['max_size']   = 1000000;
     $config['max_width']  = 10240;
     $config['max_height'] = 7680;
-    $config['file_name'] = $_FILES['cover_photo']['name'] ;//basename($this->put('cover_photo')) ;
-    //Load upliad library and initialize configuration
+    // $config['file_name'] = basename($_FILES['cover_photo_update']['name']) ;
     $this->load->library('upload',$config) ;
     $this->upload->initialize($config) ;
     $this->upload->do_upload('cover_photo') ;
@@ -179,7 +228,7 @@ class Host extends REST_Controller
         'year' => $this->put('year') ,
         'cancellation_policy' => $this->put('cancellation_policy')
 
-      ) ;
+        ) ;
     }
     else {
       $update_data = array(
@@ -191,6 +240,12 @@ class Host extends REST_Controller
 
       ) ;
     }
+
+
+    //Load upliad library and initialize configuration
+
+
+
     $this->Host_model->get_update($carID,$update_data) ;
     // $number_of_files = sizeof($_FILES['other_photo']['name']) ;
     // $files = $_FILES['other_photo'] ;

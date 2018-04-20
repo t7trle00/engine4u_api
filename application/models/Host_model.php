@@ -5,6 +5,7 @@
 class Host_model extends CI_model
 {
 
+
   public function get_listing()
   {
     $this->db->select('carID,title,description,cover_photo,type_of_car,year,cancellation_policy,photo') ;
@@ -27,7 +28,6 @@ class Host_model extends CI_model
   {
     $this->db->insert_batch('images',$images_list) ;
   }
-
 public function get_delete_images($carID)
 {
   $this->db->where('carID',$carID) ;
@@ -38,7 +38,13 @@ public function get_delete_listing($carID)
   $this->db->where('carID',$carID) ;
   $this->db->delete('cars') ;
 }
-
+public function get_cover_photo()
+{
+  $this->db->select('carID, title, cover_photo') ;
+  $this->db->from('cars') ;
+  // $this->db->where('carID',$carID) ;
+  return $this->db->get()->result_array() ;
+}
 
   public function getImage($last_insert_id)
   {
@@ -52,6 +58,13 @@ public function get_delete_listing($carID)
     $this->db->where('carID',$carID) ;
     return $this->db->update('cars',$update_data) ;
 
+  }
+  public function checkPhotoname($photo)
+  {
+    $this->db->select('cover_photo') ;
+    $this->db->from('cars') ;
+    $this->db->where('cover_photo',$photo) ;
+    return $this->db->numb_rows() ;
   }
 
  }

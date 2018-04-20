@@ -1,0 +1,27 @@
+.hostNav
+{
+  text-align: left ;
+  font-size: 1.5em ;
+}
+.hostButton
+{
+  background: none ;
+  border: none ;
+}
+table.getListing tr, th, td
+{
+  padding: 10px ;
+  text-align: center ;
+}
+.addform
+{
+  font-size: 1.25em ;
+  padding-top: 30px ;
+}
+.show_detail
+{
+  text-align: right ;
+  margin: 10px auto ;
+  font-size: 1.25em ;
+  width: 500px ;
+}
