@@ -26,7 +26,7 @@ class Host_model extends CI_model
 
   public function add_photo($images_list)
   {
-    $this->db->insert_batch('images',$images_list) ;
+    return $this->db->insert_batch('images',$images_list) ;
   }
 public function get_delete_images($carID)
 {
@@ -57,14 +57,7 @@ public function get_cover_photo()
   {
     $this->db->where('carID',$carID) ;
     return $this->db->update('cars',$update_data) ;
+  }
 
-  }
-  public function checkPhotoname($photo)
-  {
-    $this->db->select('cover_photo') ;
-    $this->db->from('cars') ;
-    $this->db->where('cover_photo',$photo) ;
-    return $this->db->numb_rows() ;
-  }
 
  }

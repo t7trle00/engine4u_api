@@ -22,34 +22,39 @@ class Host_controller extends CI_Controller {
  {
    parent::__construct() ;
    $this->load->model('Host_model') ;
+   $this->load->helper('form') ;
  }
 	public function add_listing()
 	{
 		$data['page'] = 'host/add_listing' ;
-		$this->load->view('host/menu_bar',$data);
+		$this->load->view('menu/content',$data);
 	}
   public function host()
   {
     $data['page'] = 'host/menu_bar' ;
     $this->load->view('host/menu_bar',$data) ;
   }
-	// public function update_listing($carID)
-	// {
-	// 	$data['carID'] =$carID ;
-	// 	$data['id_get_edit'] = $this->Host_model->get_carID($carID) ;
-	// 	$data['page'] = 'host/edit_listing' ;
-	// 	$this->load->view('menu/content',$data) ;
-	// }
-	public function listing_detail()
-	{
-		$data['page'] = 'host/listing_detail' ;
-		$this->load->view('menu/content',$data) ;
-	}
+  public function get_listing_update()
+  {
+    $data['images']=$this->Host_model->get_listing();
+    $data['page'] ='host/get_listing_update' ;
+    $this->load->view('menu/content',$data) ;
+  }
+  public function listing_detail($carID)
+  {
+    $data['carID'] =$carID ;
+    $data['id_get_edit'] = $this->Host_model->get_carID($carID) ;
+    $data['page'] ='host/listing_detail' ;
+
+    $this->load->view('menu/content',$data) ;
+  }
+
 	public function edit_listing()
 	{
+    $config['file_name'] = $_FILES['cover_photo_update']['name'] ;
 	  $config['upload_path'] ='./cover_gallery/' ;
 	  $config['allowed_types'] = 'jpg|jpeg|png|gif' ;
-	  $config['file_name'] = $_FILES['cover_photo_update']['name'] ;
+
 
 	  //Load upliad library and initialize configuration
 	  $this->load->library('upload',$config) ;
@@ -57,7 +62,8 @@ class Host_controller extends CI_Controller {
 	  $this->upload->do_upload('cover_photo_update') ;
 	  $data_upload_file = $this->upload-> data() ;
 	  $image = $data_upload_file['file_name'] ;
-	  $update_id = $this->input->post('carID') ;
+	  $carID = $this->input->post('carID') ;
+    $update_data=[] ;
 	  if(!empty($image))
 	  {
 	    $update_data = array(
@@ -80,7 +86,7 @@ class Host_controller extends CI_Controller {
 
 	    ) ;
 	  }
-	  $success_1 = $this->Host_model->get_update($update_id,$update_data) ;
+	  $success_1 = $this->Host_model->get_update($carID,$update_data) ;
 	  $number_of_files = sizeof($_FILES['other_photo']['name']) ;
 	  $files = $_FILES['other_photo'] ;
 	  $config['upload_path'] = './other_gallery/' ;
@@ -101,23 +107,36 @@ class Host_controller extends CI_Controller {
 	    $update_images[$i]['photo'] = $data['file_name'] ;
 
 	  }
-	  $carID = $update_id ;
-	  $this->Host_model->get_delete_images($carID) ;
-	  $images_list=array_map( function($addID) use ($update_id)
-	  {
-	    $addID['carID']=$update_id ;
-	    return $addID ;
-	  },$update_images) ;
-	  $success_2 = $this->Host_model->add_photo($images_list) ;
-	  if($success_1 && $success_2)
-	  {
-	    $data['message'] = 'Data has been updated.' ;
-	  }
-	  else {
-	    $data['message'] = 'Error.' ;
-	  }
+    if(!empty($_FILES['other_photo']['name']))
+    {
+      $this->Host_model->get_delete_images($carID) ;
+      $images_list=array_map( function($addID) use ($carID)
+      {
+        $addID['carID']=$carID;
+        return $addID ;
+      },$update_images) ;
+      $success_2 = $this->Host_model->add_photo($images_list) ;
+      if($success_1 && $success_2)
+      {
+        $data['message'] = 'Data has been updated.' ;
+      }
+      else {
+        $data['message'] = 'Error.' ;
+      }
+    }
+    else
+    {
+      if($success_1)
+      {
+        $data['message'] = 'Data has been updated.' ;
+      }
+      else {
+        $data['message'] = 'Error.' ;
+      }
+    }
+
 	  $data['page'] = 'host/message' ;
-	  $this->load->view('menu_content/content',$data) ;
+	  $this->load->view('menu/content',$data) ;
 
 
 }

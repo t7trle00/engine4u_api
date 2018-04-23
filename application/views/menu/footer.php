@@ -1,5 +1,5 @@
 <div class="" style="margin-top:50px"></div>
-<footer>
+<footer class="footer">
     <div class="container-fluid text-center">
       <div class="foots">
         <a href=""><img src="<?php echo base_url('images/fb.png');?>" alt="fb"></a>

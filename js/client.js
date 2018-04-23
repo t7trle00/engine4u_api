@@ -140,21 +140,23 @@ function ShowSpeListing(carID)
 
             jsonData= JSON.parse(xhttp.responseText) ;
                 data += '<div style="text-align:center">' +
-                        '<img src="' + cover_url + jsonData[0].cover_photo + '" width="900px" height="450px">' +
+                        '<img src="' + cover_url + jsonData[0].cover_photo + '" width="700px" height="350px">' +
                         '</div>' +
                         '<div class="show_detail">' +
-                        '<h2>' + jsonData[0].title + '</h2>' +
-                        '<h3>DESCRIPTION  </h3>' +
+                        '<h1><b>' + jsonData[0].title + '</b></h1>' +
+                        '<h3>DESCRIPTION</h3>' +
                         jsonData[0].description + '<br>' +
-                        '<h3>OTHER PHOTOS</h3>' ;
+                        '<h3>PHOTO</h3>' +
+                        '<div class="photo_div"><table align="left"><tr>' ;
                         for (x in jsonData)
                         {
-                           data += '<img src="' + other_url + jsonData[x].photo + '" width="300px" height="300px">' + '<br>' ;
+                            data += '<td><img src="' + other_url + jsonData[x].photo + '" width="150px" height="150px">' + '</td>' ;
                         }
 
-                        data +=
+                        data += '</tr></table></div>' +
                         '<h3>TYPE OF CAR </h3>' + jsonData[0].type_of_car + '<br>' +
                         '<h3>YEAR </h3>' + jsonData[0].year + '<br>' +
+                        '<h3>PRICE </h3>' + jsonData[0].price + ' Euro<br>' +
                         '<h3>CANCELLATION POLICY </h3>' + jsonData[0].cancellation_policy +
                         '</div>';
             document.getElementById('results').innerHTML = data ;
@@ -173,7 +175,7 @@ function AddListing()
 	var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url,true);
     var form = document.getElementById("AddForm") ;
-    var formData = new FormData(form) ;
+    var formData = new FormData(form);
     xhttp.onreadystatechange = function()
     {
         if(xhttp.readyState == 4 && xhttp.status == 201)
@@ -205,7 +207,7 @@ function GetUpdateListing(carID,title,description,cover_photo,photo,type_of_car,
     var other_url = "http://localhost/engine4u_api/other_gallery/" ;
 
     var formData = '<form enctype="multipart/form-data" method="post" id="UpdateForm">' +
-              '<input type="text" id="title" value="'+this.title+'">' + '<br>' +
+              '<input type="text" id="title" value="'+this.titlee+'">' + '<br>' +
               '<label>DESCRIPTION </label>' +
               '<textarea id="description" cols="30" rows="10">'+this.description+'</textarea>' + '<br>' +
 
@@ -238,7 +240,7 @@ function addCover(carID)
     //this.cover=formData;
     var form = new FormData(cover) ;
     xhttp.open("POST", url,true);
-/*     var cover_photo = document.getElementById("cover_photo_update").value ; */
+    var cover_photo = document.getElementById("cover_photo_update").value ;
     xhttp.onreadystatechange = function()
     {
         if(xhttp.readyState == 4 && xhttp.status == 201)
@@ -256,7 +258,7 @@ function UpdateListing(carID)
 {
     this.carID = carID
     var url = "http://localhost/engine4u_api/index.php/api/host/listing/carid/" + carID;
-	var xhttp = new XMLHttpRequest();
+    var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", url,true);
 
     var data = {} ;
