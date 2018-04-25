@@ -41,7 +41,12 @@
       <tr>
         <td style="text-align:left">TYPE OF CAR</td>
         <td style="text-align:left">
-          <input type="text" name="type_of_car">
+          <select name="type_of_car">
+              <option value="">Choose an option</option>
+              <option value="4 seats">4 seats</option>
+              <option value="7 seats">7 seats</option>
+              <option value="10 seats">10 seats</option>
+          </select>
           <p><i>Give a details about how many seats your car has</i></p>
         </td>
       </tr>

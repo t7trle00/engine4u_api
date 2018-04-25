@@ -118,27 +118,21 @@ class Host_controller extends CI_Controller {
       $success_2 = $this->Host_model->add_photo($images_list) ;
       if($success_1 && $success_2)
       {
-        $data['message'] = 'Data has been updated.' ;
+        echo '<script>alert("Data updated successfully")</script>' ;
       }
       else {
-        $data['message'] = 'Error.' ;
+        echo '<script>alert("Error")</script>' ;
       }
     }
     else
     {
       if($success_1)
       {
-        $data['message'] = 'Data has been updated.' ;
-      }
-      else {
-        $data['message'] = 'Error.' ;
+        echo '<script>alert("Data updated successfully")</script>' ;
       }
     }
-
-	  $data['page'] = 'host/message' ;
-	  $this->load->view('menu/content',$data) ;
-
-
+    $data['page'] = 'host/message' ;
+    $this->load->view('menu/content',$data) ;
 }
 
 }

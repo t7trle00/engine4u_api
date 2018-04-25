@@ -11,7 +11,7 @@
   </nav>
 </div>
 <div id="results">
-  <table>
+  <table border="1" align="center" class="getListing">
     <th>ID</th>
     <th>TITLE</th>
     <th>EDIT</th>
@@ -22,7 +22,7 @@
         <td><?php echo $row['carID'] ;?></td>
         <td><?php echo $row['title'] ;?></td>
         <td><a href="<?php echo site_url('host_controller/listing_detail/').$row['carID']?>">
-          <button class="btn btn-warning">EDIT</button></td></a>
+          <button class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></button></td></a>
         </tr>
       <?php
         }

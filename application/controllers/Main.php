@@ -30,5 +30,21 @@ class Main extends CI_Controller {
 
     $this->load->view('menu/content',$data) ;
   }
+  public function contact_us()
+  {
+    $data['page'] = 'main/contact_us' ;
+    $this->load->view('menu/content',$data) ;
+  }
+  public function term_of_use()
+  {
+    $data['page'] = 'main/term_of_use' ;
+    $this->load->view('menu/content',$data) ;
+  }
+  public function privacy_policy()
+  {
+    $data['page'] = 'main/privacy_policy' ;
+    $this->load->view('menu/content',$data) ;
+  }
+
 
 }

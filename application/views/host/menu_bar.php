@@ -1,6 +1,6 @@
 <?php
-  $this->load->view('menu/header') ; ?>
-
+  $this->load->view('menu/header') ;
+?>
 <div class="hostNav" style="text-align:center">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
