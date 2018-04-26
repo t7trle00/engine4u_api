@@ -27,7 +27,7 @@ class Host_controller extends CI_Controller {
 	public function add_listing()
 	{
 		$data['page'] = 'host/add_listing' ;
-		$this->load->view('menu/content',$data);
+		$this->load->view('host/add_listing',$data);
 	}
   public function host()
   {
@@ -36,7 +36,7 @@ class Host_controller extends CI_Controller {
   }
   public function get_listing_update()
   {
-    $data['images']=$this->Host_model->get_listing();
+    $data['images']=$this->Host_model->get_listinguniq();
     $data['page'] ='host/get_listing_update' ;
     $this->load->view('menu/content',$data) ;
   }
@@ -71,6 +71,7 @@ class Host_controller extends CI_Controller {
 	      'description' => $this->input->post('description') ,
 	      'cover_photo' => $image ,
 	      'type_of_car' => $this->input->post('type_of_car') ,
+        'price' => $this->input->post('price'),
 	      'year' => $this->input->post('year') ,
 	      'cancellation_policy' => $this->input->post('cancellation_policy')
 
@@ -81,6 +82,7 @@ class Host_controller extends CI_Controller {
 	      'title' => $this->input->post('title') ,
 	      'description' => $this->input->post('description') ,
 	      'type_of_car' => $this->input->post('type_of_car') ,
+        'price' => $this->input->post('price'),
 	      'year' => $this->input->post('year') ,
 	      'cancellation_policy' => $this->input->post('cancellation_policy')
 

@@ -187,33 +187,45 @@
         <?php $i = count($dataImage)-1;?>
         <!-- still $carID left -->
         <div class="col-sm-2">
+          <a href="<?php echo site_url('main/detail/').$dataImage[$i]['carID']?>">
           <p><?php echo $dataImage[$i]['title']?></p>
-          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i]['cover_photo']?>" class="img-responsive" style="width:100%" alt="Image">
+          </a>
+          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i]['cover_photo']?>" class="img-responsive" style="width:100%;height:100px" alt="Image">
         </div>
         <div class="col-sm-2">
+          <a href="<?php echo site_url('main/detail/').$dataImage[$i-1]['carID']?>">
           <p><?php echo $dataImage[$i-1]['title']?></p>
-          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i-1]['cover_photo']?>" class="img-responsive" style="width:100%" alt="Image">
+          </a>
+          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i-1]['cover_photo']?>" class="img-responsive" style="width:100%;height:100px" alt="Image">
         </div>
         <div class="col-sm-2">
+          <a href="<?php echo site_url('main/detail/').$dataImage[$i-2]['carID']?>">
           <p><?php echo $dataImage[$i-2]['title']?></p>
-          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i-2]['cover_photo']?>" class="img-responsive" style="width:100%" alt="Image">
+          </a>
+          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i-2]['cover_photo']?>" class="img-responsive" style="width:100%;height:100px" alt="Image">
         </div>
         <div class="col-sm-2">
+          <a href="<?php echo site_url('main/detail/').$dataImage[$i-3]['carID']?>">
           <p><?php echo $dataImage[$i-3]['title']?></p>
-          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i-3]['cover_photo']?>" class="img-responsive" style="width:100%" alt="Image">
+          </a>
+          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i-3]['cover_photo']?>" class="img-responsive" style="width:100%;height:100px" alt="Image">
         </div>
         <div class="col-sm-2">
+          <a href="<?php echo site_url('main/detail/').$dataImage[$i-4]['carID']?>">
           <p><?php echo $dataImage[$i-4]['title']?></p>
-          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i-4]['cover_photo']?>" class="img-responsive" style="width:100%" alt="Image">
+          </a>
+          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i-4]['cover_photo']?>" class="img-responsive" style="width:100%;height:100px" alt="Image">
         </div>
         <div class="col-sm-2">
+          <a href="<?php echo site_url('main/detail/').$dataImage[$i-5]['carID']?>">
           <p><?php echo $dataImage[$i-5]['title']?></p>
-          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i-5]['cover_photo']?>" class="img-responsive" style="width:100%" alt="Image">
+          </a>
+          <img src="<?php echo base_url('cover_gallery/').$dataImage[$i-5]['cover_photo']?>" class="img-responsive" style="width:100%;height:100px" alt="Image">
         </div>
    </div><br>
    <div class="row">
      <div class="col-sm-2">
-       <p><a href="">See More</a></p>
+       <p><a href="<?php echo site_url('main/listing_show')?>">See More</a></p>
      </div>
    </div>
    <div class="row">
@@ -254,7 +266,7 @@
   <br>
   <div class="row">
     <div class="col-sm-2">
-      <p><a href="">See More</a></p>
+      <p><a href="listing_show.php">See More</a></p>
     </div>
   </div>
   <hr>

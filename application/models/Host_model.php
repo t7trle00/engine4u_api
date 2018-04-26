@@ -5,10 +5,16 @@
 class Host_model extends CI_model
 {
 
+  public function get_listinguniq()
+  {
+    $this->db->select('*') ;
+    $this->db->from('cars') ;
+    return $this->db->get()->result_array() ;
+  }
 
   public function get_listing()
   {
-    $this->db->select('carID,title,description,cover_photo,type_of_car,year,cancellation_policy,photo') ;
+    $this->db->select('carID,title,description,cover_photo,type_of_car,year,cancellation_policy,photo,price') ;
     $this->db->from('carsphoto') ;
     return $this->db->get()->result_array() ;
   }
@@ -42,7 +48,6 @@ public function get_cover_photo()
 {
   $this->db->select('carID, title, cover_photo') ;
   $this->db->from('cars') ;
-  // $this->db->where('carID',$carID) ;
   return $this->db->get()->result_array() ;
 }
 

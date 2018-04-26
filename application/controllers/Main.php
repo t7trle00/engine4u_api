@@ -15,7 +15,6 @@ class Main extends CI_Controller {
 	}
 
   public function main_page(){
-    // $data['carID'] = $carID ;
     $data['dataImage'] = $this->Host_model->get_cover_photo() ;
     $data['page']='main/main_pages';
     $this->load->view('menu/content',$data);
@@ -25,11 +24,7 @@ class Main extends CI_Controller {
     $data['page']='main/intruction';
     $this->load->view('menu/content',$data);
   }
-  public function CoverPhotoShow()
-  {
 
-    $this->load->view('menu/content',$data) ;
-  }
   public function contact_us()
   {
     $data['page'] = 'main/contact_us' ;
@@ -45,6 +40,18 @@ class Main extends CI_Controller {
     $data['page'] = 'main/privacy_policy' ;
     $this->load->view('menu/content',$data) ;
   }
-
+  public function listing_show()
+  {
+    $data['page'] = 'main/listing_show' ;
+    $this->load->view('main/listing_show',$data) ;
+  }
+  //show listing detail from mainpage
+  public function detail($carID)
+  {
+    $data['carID'] = $carID ;
+    $data['show_chosen'] = $this->Host_model->get_carID($carID) ;
+    $data['page'] = 'main/show_detail' ;
+    $this->load->view('menu/content',$data) ;
+  }
 
 }

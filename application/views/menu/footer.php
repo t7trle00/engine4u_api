@@ -11,7 +11,7 @@
     <div class="container-fluid text-center foots">
       <a href="<?php echo site_url('main/contact_us')?>">Contact us </a>
       <a href="<?php echo site_url('main/term_of_use')?>">Terms of use </a>
-      <a href="<?php echo site_url('main/privacy_policy')?>">Private policy</a>
+      <a href="<?php echo site_url('main/privacy_policy')?>">Privacy policy</a>
     </div>
 </footer>
 </body>

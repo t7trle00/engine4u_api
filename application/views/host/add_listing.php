@@ -1,3 +1,4 @@
+<?php $this->load->view('menu/header') ; ?>
 <div class="hostNav" style="text-align:center">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -16,7 +17,7 @@
       <tr>
         <td style="text-align:left">TITLE</td>
         <td style="text-align:left">
-          <input type="text" name="title" size="70" maxlength="30">
+          <input type="text" name="title" size="70" maxlength="30" required>
           <p><i>A short title is needed to specify your car</i></p>
         </td>
       </tr>
@@ -27,7 +28,7 @@
       <tr>
         <td style="text-align:left">COVER PHOTO</td>
         <td style="text-align:left">
-            <input type="file" name="cover_photo" require>
+            <input type="file" name="cover_photo" required>
             <p><i>Cover photo will be displayed as main picture for your car</i></p>
         </td>
       </tr>
@@ -60,7 +61,7 @@
       <tr>
         <td style="text-align:left">PRICE</td>
         <td style="text-align:left">
-          <input type="number" name="price">
+          <input type="number" name="price" required>
           <p><i>Note that price is in euro and hour based</i></p>
         </td>
       </tr>
@@ -82,3 +83,5 @@
   <div style="text-align:center">
       <button onclick="AddListing()" class="btn btn-info" style="font-size:1.0em">SAVE</button>
   </div>
+
+  <?php $this->load->view('menu/footer') ; ?>

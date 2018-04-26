@@ -93,6 +93,12 @@
                 echo '<option value="7 seats">7 seats</option>
                       <option value="10 seats">10 seats</option>' ;
               }
+              if($id_get_edit[0]['type_of_car'] == "")
+              {
+                echo '<option value="4 seats">4 seats </option>
+                      <option value="7 seats">7 seats</option>
+                      <option value="10 seats">10 seats</option>' ;
+              }
            ?>
         </select>
       </div>
@@ -137,6 +143,12 @@
             else if($id_get_edit[0]['cancellation_policy'] == "moderate")
             {
               echo '<option value="strict">Strict</option>
+                    <option value="flexible">Flexible</option>' ;
+            }
+            else if($id_get_edit[0]['cancellation_policy'] == "")
+            {
+              echo '<option value="strict">Strict</option>
+                    <option value="moderate">Moderate</option>
                     <option value="flexible">Flexible</option>' ;
             }
           ?>

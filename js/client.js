@@ -1,9 +1,36 @@
+function getMainListing(format)
+{
+  var url = "http://localhost/engine4u_api/index.php/api/host/listinguniqu";
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", url,true);
+  var jsonData = "" ;
+  var data = ""
+  var cover_url = "http://localhost/engine4u_api/cover_gallery/" ;
+  xhttp.onreadystatechange=function()
+  {
+      if(this.readyState == 4 && this.status == 200)
+      {
+          jsonData=JSON.parse(xhttp.responseText) ;
+          data='<div class="row text-center">' ;
+          for( x in jsonData)
+          {
+              data+= '<div class="col-sm-3">' +
+                     '<button style="border:none;background:none;font-size:1.25em" onclick="ShowSpeListing('+jsonData[x].carID+')">' +
+                        '<b>'+ jsonData[x].title + '</b></button><br>'+
+                     '<img src="' + cover_url + jsonData[x].cover_photo +'" style="width:150px; height:150px">' +
+                     '<br><br></div>' ;
+            }
+          }
+          data += '</div>' ;
+          document.getElementById('results').innerHTML = data ;
+
+      }
+  xhttp.send();
+}
 function getListing(format)
 {
-    /* this.format = format ; */
-    var url = "http://localhost/engine4u_api/index.php/api/host/listing";
-    /* url += '.'+ this.format ; */
- 	var xhttp = new XMLHttpRequest();
+    var url = "http://localhost/engine4u_api/index.php/api/host/listinguniqu";
+ 	  var xhttp = new XMLHttpRequest();
     xhttp.open("GET", url,true);
     var jsonData = "" ;
     var cover_url = "http://localhost/engine4u_api/cover_gallery/" ;
@@ -28,7 +55,7 @@ function getListing(format)
                 '<td>' + jsonData[x].title + '</td>' +
                 '<td><img src="' + cover_url + jsonData[x].cover_photo + '" width="100px" height="100px"></td>' +
                 '<td>' + jsonData[x].cancellation_policy + '</td>' +
-                '<td><button class="btn btn-info" onclick="ShowSpeListing(' +
+                '<td><button class="btn btn-info" onclick="ShowListingHost(' +
                         jsonData[x].carID + ')">SHOW</button></td>' +
                 '</tr>' ;
             }
@@ -40,7 +67,7 @@ function getListing(format)
 }
 function getListingDelete(format)
 {
-      var url = "http://localhost/engine4u_api/index.php/api/host/listing";
+      var url = "http://localhost/engine4u_api/index.php/api/host/listinguniqu";
    	  var xhttp = new XMLHttpRequest();
       xhttp.open("GET", url,true);
       var jsonData = "" ;
@@ -73,7 +100,7 @@ function getListingDelete(format)
 }
 function notification(){
   alert('Listing deletes successfully');
-  location.reload() ;
+  getListing() ;
 }
 function deleteListing(carID)
 {
@@ -127,8 +154,75 @@ function ShowSpeListing(carID)
         {
 
             jsonData= JSON.parse(xhttp.responseText) ;
-                data += '<div class="show_detail">' +
+                data +=
+
+                        '<div class="show_detail">' +
                         '<div class="row">' +
+                            '<button class="btn btn-info" onclick="getMainListing()">BACK</button><br><br>'+
+                            '<img src="' + cover_url + jsonData[0].cover_photo + '" width="700px" height="350px">' +
+                        '</div>' +
+                        '<div class="row">' +
+                            '<h1><b>' + jsonData[0].title + '</b></h1>' +
+                        '</div>' +
+                        '<div class="row">' +
+                            '<h3>DESCRIPTION</h3>' +
+                        '</div>' +
+                        '<div class="row">' +
+                          jsonData[0].description + '<br>' +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<h3>PHOTO</h3>' +
+                        '</div>' +
+                        '<div class="row">'
+                        for (x in jsonData)
+                        {
+                            data += '<div class="col-sm-3"><img src="' + other_url + jsonData[x].photo + '" width="150px" height="150px">' + '<br><br></div>' ;
+                        }
+
+                        data += '</div>' +
+                        '<div class="row">' +
+                        '<h3>TYPE OF CAR </h3>' + jsonData[0].type_of_car +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<h3>YEAR </h3>' + jsonData[0].year +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<h3>PRICE </h3>' + jsonData[0].price + ' Euro' +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<h3>CANCELLATION POLICY </h3>' + jsonData[0].cancellation_policy +
+                        '</div></div>';
+            document.getElementById('results').innerHTML = data ;
+        }
+        else
+        {
+            document.getElementById('results').innerHTML = 'SOME THING WRONG' ;
+        }
+    }
+    xhttp.send() ;
+}
+function ShowListingHost(carID)
+{
+    this.carID = carID ;
+    var url = "http://localhost/engine4u_api/index.php/api/host/listing/carid/" + this.carID ;
+    var xhttp = new XMLHttpRequest() ;
+    xhttp.open("GET",url,true) ;
+
+    var jsonData = "" ;
+    var data = "" ;
+    var cover_url = "http://localhost/engine4u_api/cover_gallery/" ;
+    var other_url = "http://localhost/engine4u_api/other_gallery/" ;
+    xhttp.onreadystatechange = function()
+    {
+        if(xhttp.readyState == 4 && xhttp.status == 200)
+        {
+
+            jsonData= JSON.parse(xhttp.responseText) ;
+                data +=
+
+                        '<div class="show_detail">' +
+                        '<div class="row">' +
+                            '<button class="btn btn-info" onclick="getListing()">BACK</button><br><br>'+
                             '<img src="' + cover_url + jsonData[0].cover_photo + '" width="700px" height="350px">' +
                         '</div>' +
                         '<div class="row">' +
