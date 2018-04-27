@@ -54,8 +54,9 @@ class Host_controller extends CI_Controller {
     $config['file_name'] = $_FILES['cover_photo_update']['name'] ;
 	  $config['upload_path'] ='./cover_gallery/' ;
 	  $config['allowed_types'] = 'jpg|jpeg|png|gif' ;
-
-
+    $config['max_size']   = 1000000;
+    $config['max_width']  = 10240;
+    $config['max_height'] = 7680;
 	  //Load upliad library and initialize configuration
 	  $this->load->library('upload',$config) ;
 	  $this->upload->initialize($config) ;

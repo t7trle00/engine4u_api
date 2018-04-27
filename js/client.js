@@ -1,3 +1,4 @@
+//main page see more
 function getMainListing(format)
 {
   var url = "http://localhost/engine4u_api/index.php/api/host/listinguniqu";
@@ -27,6 +28,7 @@ function getMainListing(format)
       }
   xhttp.send();
 }
+//host show all
 function getListing(format)
 {
     var url = "http://localhost/engine4u_api/index.php/api/host/listinguniqu";

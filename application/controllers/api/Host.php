@@ -58,10 +58,6 @@ class Host extends REST_Controller
         ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
     }
   }
-
-
-
-
   public function listing_get()
   {
     $listing = $this->Host_model->get_listing() ;

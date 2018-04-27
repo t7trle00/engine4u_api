@@ -1,3 +1,4 @@
+
 <div class="show_detail">
     <div class="row">
         <img src="<?php echo base_url().'cover_gallery/'.$show_chosen[0]['cover_photo']?>" width="700px" height="350px">

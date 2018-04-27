@@ -48,7 +48,6 @@ class Main extends CI_Controller {
   //show listing detail from mainpage
   public function detail($carID)
   {
-    $data['carID'] = $carID ;
     $data['show_chosen'] = $this->Host_model->get_carID($carID) ;
     $data['page'] = 'main/show_detail' ;
     $this->load->view('menu/content',$data) ;
